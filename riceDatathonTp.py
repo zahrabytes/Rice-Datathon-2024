@@ -6,6 +6,9 @@ img_path = "placeholder_image.png"
 prob = 0
 pred = ""
 chevron_path = r"Chevron_Logo.svg.png"
+plots = r"plots.png"
+graph1 = r"graph1.png"
+graph2 = r"graph2.png"
 page = """
 Markdown
 <|text-center|
@@ -13,17 +16,13 @@ Markdown
 
 <|{chevron_path}|image|>
 >
-<|{content}|file_selector|extensions=.png|>
-select an CSV from your file system
+<|{content}|file_selector|extensions=.csv|>
+Select a CSV file from your file system.
 
-<|{pred}|>
+### Prediction
+<|{pred}|text|>
+Prediction Probability: <|{prob}|text|>
 
-<|{img_path}|image|>
-Value: <|{value}|text|>
-
-<|{value}|slider|>
-
-<|{data}|chart|>
 """
 
 def compute_data(decay: int) -> list:
@@ -35,4 +34,5 @@ data = compute_data(value)
 def slider_changed(state):
     state.data = compute_data(state.value)
 
-Gui(page,).run(use_reloader=True, port=5001)
+Gui(page).run(use_reloader=True, port=5001)
+
